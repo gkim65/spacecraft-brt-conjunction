@@ -22,9 +22,7 @@ import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.linalg import expm
 
-
-# Earth gravitational parameter (m^3/s^2)
-MU_EARTH = 3.986004418e14
+from ..utils.constants import MU_EARTH
 
 
 def orbital_rate(sma: float) -> float:

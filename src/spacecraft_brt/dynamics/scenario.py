@@ -9,6 +9,7 @@ Initial conditions are specified in the RTN relative frame.
 from dataclasses import dataclass, field
 import numpy as np
 from .hcw import orbital_rate, propagate_hcw, time_of_closest_approach, hcw_state_transition
+from ..utils.constants import R_EARTH, R_HBR_DEFAULT
 
 
 @dataclass
@@ -29,7 +30,7 @@ class ConjunctionScenario:
     sma: float
     x0: np.ndarray
     t_horizon: float
-    hard_body_r: float = 10.0  # 10m combined hard-body radius (typical LEO)
+    hard_body_r: float = R_HBR_DEFAULT  # combined hard-body radius (m)
     covariance: np.ndarray = field(default_factory=lambda: np.eye(6))
     name: str = "default"
 
@@ -90,7 +91,7 @@ def make_leo_conjunction(
     along_track_offset_km: float = 50.0,
     radial_offset_km: float = 0.1,
     relative_velocity_mps: float = 15.0,
-    hard_body_r: float = 10.0,
+    hard_body_r: float = R_HBR_DEFAULT,
     covariance_scale: float = 1.0,
 ) -> ConjunctionScenario:
     """
@@ -110,7 +111,6 @@ def make_leo_conjunction(
     Returns:
         ConjunctionScenario configured for the specified encounter.
     """
-    R_EARTH = 6.371e6  # m
     sma = R_EARTH + altitude_km * 1e3
 
     x0 = np.array([
@@ -152,7 +152,7 @@ def make_leo_conjunction(
 def make_crossing_conjunction(
     altitude_km: float = 550.0,
     relative_velocity_mps: float = 7000.0,
-    hard_body_r: float = 10.0,
+    hard_body_r: float = R_HBR_DEFAULT,
     covariance_scale: float = 1.0,
     miss_distance: float = 1.0,
     orbital_periods: float = 15.0,
@@ -173,7 +173,6 @@ def make_crossing_conjunction(
     Returns:
         ConjunctionScenario configured for the specified encounter.
     """
-    R_EARTH = 6.371e6  # m
     sma = R_EARTH + altitude_km * 1e3
     dr = miss_distance * 1e3  # convert km to m
 
