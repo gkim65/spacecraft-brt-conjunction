@@ -1,0 +1,24 @@
+# Local-only notes
+claude.md
+docs/**
+figures/**
+
+# Python
+**/__pycache__/**
+*.pyc
+*.egg-info/
+
+# Caches
+.pytest_cache
+.ruff_cache
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
