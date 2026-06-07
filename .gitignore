@@ -22,3 +22,6 @@ figures/**
 .DS_Store
 .idea/
 .vscode/
+
+# Claude Code local runtime (machine-specific locks/state)
+.claude/
